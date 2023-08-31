@@ -1,0 +1,80 @@
+<apex:page standardController="Contact" action="{!PostLoad}" extensions="ConciergeLiveHistoryController" showHeader="false" sidebar="false">
+
+	<style>
+	    .ra {text-align:right;}
+	    .ca {text-align:center;}
+	    .la {text-align:left;}
+	</style>
+
+	<apex:outputPanel Id="Loading" rendered="{!DisplayLoadingMessage==true}">
+
+		<!-- Script must be located here so it only runs once-->
+		<script language="javascript">
+
+			function invokeVFPage() {
+				window.location.replace("/apex/ConciergeLiveHistory?Id={!ContactId}&mode=loaded");
+			}
+
+			setTimeout("invokeVFPage()", 1000);
+
+		</script>
+
+
+		<apex:outputText value="Loading event history from Concierge Live... "/>
+		<apex:image value="{!$Resource.ConciergeLiveSpinner}" width="16" height="16"/>
+	</apex:outputPanel>
+
+	<apex:outputPanel Id="Loaded" rendered="{!DisplayLoadingMessage==false}">
+
+		<apex:pageBlock mode="detail" >
+
+			<apex:outputPanel layout="block" style="max-height:110px; overflow:auto">
+
+				<apex:pageBlockTable value="{!oHistoryList}" var="g" >
+					<apex:column >
+					  <apex:facet name="header">Event</apex:facet>
+					  <apex:outputText value="{!g.oEvent}"/>
+					</apex:column>
+					<apex:column >
+					  <apex:facet name="header">Venue</apex:facet>
+					  <apex:outputText value="{!g.oVenue}"/>
+					</apex:column>
+					<apex:column >
+					  <apex:facet name="header">Date</apex:facet>
+					  <apex:outputText value="{!g.oDate}"/>
+					</apex:column>
+					<apex:column headerClass="ca" styleClass="ca">
+					  <apex:facet name="header">Number of Tickets</apex:facet>
+					  <apex:outputText value="{!g.oNumberOfTickets}"/>
+					</apex:column>
+                  	<apex:column headerClass="ra" styleClass="ra">
+                      <apex:facet name="header">Value</apex:facet>
+                      <apex:outputText value="${0, number,###,##0}" rendered="{!g.oValue != null}">
+				        <apex:param value="{!g.oValue}" />
+				      </apex:outputText>
+                  	</apex:column>
+					<apex:column headerClass="ca" styleClass="ca">
+					  <apex:facet name="header">Ticket Request Id</apex:facet>
+					  <apex:outputText value="{!g.oTicketRequestId}"/>
+					</apex:column>
+					<apex:column >
+					  <apex:facet name="header">Requester</apex:facet>
+					  <apex:outputText value="{!g.oRequester}"/>
+					</apex:column>
+
+				</apex:pageBlockTable>
+
+			</apex:outputPanel>
+
+			<apex:outputPanel layout="block" rendered="{!GeneralMessage != null && GeneralMessage != ''}">
+				<br></br>
+				<apex:outputText style="font-style: italic; color:grey" value="{!GeneralMessage}"/>
+				<br></br>
+				<br></br>
+			</apex:outputPanel>
+
+		</apex:pageBlock>
+
+	</apex:outputPanel>
+
+</apex:page>

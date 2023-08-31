@@ -1,0 +1,57 @@
+<apex:page controller="ConciergeLiveAppSettingsController" action="{!loadSettings}" showHeader="true" sidebar="true" title="Concierge Live Settings">
+<apex:form forceSSL="true" >
+
+	<head></head>
+
+	<apex:stylesheet value="{!$Resource.ConciergeLiveStyles}"/>
+
+	<apex:sectionHeader title="Application Settings" subtitle="Concierge Live"/>
+
+	<span class="heavy">Use this page to maintain application settings information Concierge Live.</span>
+
+	<br></br><br></br>
+
+    <apex:messages />
+
+    <apex:pageBlock mode="edit" rendered="{!bEditMode}">
+
+        <apex:pageBlockSection columns="1" title="Functional Settings" collapsible="false">
+            <apex:inputField style="width:400px;" value="{!oAppSettings.Sub_Domain_Name__c}" />
+            <apex:inputField style="width:400px;" value="{!oAppSettings.Authorization_Key__c}" />
+            <apex:inputField value="{!oAppSettings.Historical_Debug__c}" />
+            <apex:inputField value="{!oAppSettings.UseSandbox__c}" />
+            <apex:inputField value="{!oAppSettings.Manual_Select_Account_Contacts__c}" />
+            <apex:inputField style="width:400px;" value="{!oAppSettings.Contact_Filter__c}" />
+            <apex:inputField style="width:400px;" value="{!oAppSettings.Disallowed_Message__c}" />
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!SavePage}" value="Save" />
+                <apex:commandButton action="{!CancelPage}" value="Cancel" />
+        </apex:pageBlockButtons>
+
+    </apex:pageBlock>
+
+
+    <apex:pageBlock mode="maindetail" rendered="{!bEditMode==false}">
+
+        <apex:pageBlockSection columns="1" title="Functional Settings" collapsible="false">
+            <apex:outputField value="{!oAppSettings.Sub_Domain_Name__c}" />
+            <apex:outputField value="{!oAppSettings.Authorization_Key__c}" />
+            <apex:outputField value="{!oAppSettings.Historical_Debug__c}" />
+            <apex:outputField value="{!oAppSettings.UseSandbox__c}" />
+            <apex:outputField value="{!oAppSettings.Manual_Select_Account_Contacts__c}" />
+            <apex:outputField value="{!oAppSettings.Contact_Filter__c}" />
+            <apex:outputField value="{!oAppSettings.Disallowed_Message__c}" />
+        </apex:pageBlockSection>
+
+        <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!editPage}" value="Edit" />
+       </apex:pageBlockButtons>
+
+
+     </apex:pageBlock>
+
+
+</apex:form>
+</apex:page>

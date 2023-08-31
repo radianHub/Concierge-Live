@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Using_Tickets__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>Whether or not this attendee is using the tickets. Attendees on ticket requests can change before an event happens and the indicated attendee may no longer be using the tickets.</description>
+    <externalId>false</externalId>
+    <label>Using Tickets</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

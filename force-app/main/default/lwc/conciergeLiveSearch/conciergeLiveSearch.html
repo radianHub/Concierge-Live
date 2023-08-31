@@ -1,0 +1,45 @@
+<template>
+    <div class="slds-card">
+        <lightning-card title="Search">
+            <div class="slds-p-horizontal_small slds-p-bottom_large slds-clearfix">
+                <lightning-record-edit-form object-api-name="Case" >
+                    <lightning-input-field field-name='ContactId' data-name='contact' onchange={contactSelected}></lightning-input-field>
+                    <lightning-button label="Add to Selected" class="slds-float_right" disabled={disableAddButton} onclick={addSearchContactToSelected}></lightning-button>
+                </lightning-record-edit-form>
+            </div>
+        </lightning-card>
+    </div>
+
+    <template if:true={accountId}>
+        <div class="slds-card">
+            <lightning-card title="Quick-Add Account Contacts">
+                <div class="slds-card__body slds-card__body_inner">
+                    <div class="slds-text-body_regular slds-p-bottom_large">Move Contacts down below to select for a new request in Concierge Live.</div>
+                    <lightning-datatable
+                        key-field="id"
+                        data={selectableAccountContacts}
+                        columns={accountContactColumns}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+
+    <div class="slds-card">
+        <lightning-card title="Selected Contacts">
+            <lightning-button label="Send To Concierge Live" variant="brand" slot="actions" disabled={disableSubmitButton} onclick={sendToConciergeLive}></lightning-button>
+            <div class="slds-card__body slds-card__body_inner">
+                <div class="slds-text-body_regular slds-p-bottom_large">Contacts shown here have been selected to send to Concierge Live to request tickets for.</div>
+                <lightning-datatable
+                    key-field="id"
+                    data={selectedContacts}
+                    columns={selectedContactsColumns}
+                    onrowaction={handleRowAction}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+            </div>
+        </lightning-card>
+    </div>
+</template>

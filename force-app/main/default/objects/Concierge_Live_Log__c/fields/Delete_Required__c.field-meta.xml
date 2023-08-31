@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delete_Required__c</fullName>
+    <description>If checked, indicates record is available for cleanup (removal) due to age.</description>
+    <externalId>false</externalId>
+    <formula>IF ( (TODAY() - DATEVALUE(CreatedDate)) &gt; 7, true, false )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>If checked, indicates record is available for cleanup (removal) due to age.</inlineHelpText>
+    <label>Delete Required</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Manual_Select_Account_Contacts__c</fullName>
+    <defaultValue>true</defaultValue>
+    <deprecated>false</deprecated>
+    <description>When using the Account-level table, clicking &quot;Request Tickets&quot; will automatically select all Contacts for that Account. Enable this if you&apos;d like to manually choose Contacts one at a time.</description>
+    <externalId>false</externalId>
+    <label>Manual Select Account Contacts?</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

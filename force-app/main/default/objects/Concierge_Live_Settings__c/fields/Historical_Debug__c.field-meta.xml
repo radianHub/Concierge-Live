@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Historical_Debug__c</fullName>
+    <defaultValue>false</defaultValue>
+    <deprecated>false</deprecated>
+    <description>This is provided by Concierge Live. Set this value to true in order to see additional details in the historical view.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is provided by Concierge Live. Set this value to true in order to see additional details in the historical view.</inlineHelpText>
+    <label>Historical Debug</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

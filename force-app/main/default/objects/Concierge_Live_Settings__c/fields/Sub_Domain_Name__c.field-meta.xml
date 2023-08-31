@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Domain_Name__c</fullName>
+    <deprecated>false</deprecated>
+    <description>This is provide by Concierge Live and typically reflects the name of your company. For example: &apos;acme&apos; would be the sub domain in &apos;https://acme.ConciergeLive.com&apos;</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This is provide by Concierge Live and typically reflects the name of your company. For example: &apos;acme&apos; would be the sub domain in &apos;https://acme.ConciergeLive.com&apos;</inlineHelpText>
+    <label>Sub Domain Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

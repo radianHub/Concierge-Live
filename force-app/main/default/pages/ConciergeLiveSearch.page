@@ -1,0 +1,182 @@
+<apex:page controller="ConciergeLiveSearchController" action="{!PostLoad}" showHeader="true" sidebar="true" title="Concierge Live Search" tabStyle="Concierge_Live_Search__tab">
+<apex:form forceSSL="true" id="MainFormId">
+
+<script>
+   function noenter(ev)
+   {
+      if (window.event)
+      {
+          ev=window.event;
+      }
+
+      var keyCode;
+      if (ev.keyCode)
+      {
+         keyCode=ev.keyCode;
+      }
+      else
+      {
+         keyCode=ev.charCode;
+      }
+      if (keyCode == 13)
+      {
+         return false;
+      }
+      else
+      {
+         return true;
+      }
+   }
+</script>
+
+	<head></head>
+
+	<apex:stylesheet value="{!$Resource.ConciergeLiveStyles}"/>
+
+	<apex:sectionHeader title="A Better Way To Manage Company Tickets" subtitle="Concierge Live"/>
+
+	<span class="heavy">Use this page to build a list of Salesforce Contacts and start the ticket selection process at Concierge Live.</span>
+
+	<br></br><br></br>
+
+	<apex:pageMessages Id="MainMessagesId"></apex:pageMessages>
+
+	<br></br>
+
+	<apex:pageBlock mode="detail" title="Search Criteria" Id="SearchCriteriaId">
+
+		<span class="heavy">Please enter search criteria in at least one field.</span><br></br><br></br>
+
+        <apex:pageBlockSection columns="2" collapsible="false">
+
+	        <apex:pageBlockSectionItem >
+	        	<apex:outputLabel value="First name"></apex:outputLabel>
+	        	<apex:inputText value="{!SearchFirstName}" id="FirstNameId" onkeypress="return noenter(event);"/>
+	        </apex:pageBlockSectionItem>
+
+ 	        <apex:pageBlockSectionItem >
+	        	<apex:outputLabel value="Account name"></apex:outputLabel>
+	        	<apex:inputField value="{!SearchAccount.ParentId}" id="AccountId" onkeypress="return noenter(event);"/>
+	        </apex:pageBlockSectionItem>
+
+	        <apex:pageBlockSectionItem >
+	        	<apex:outputLabel value="Last name"></apex:outputLabel>
+	        	<apex:inputText value="{!SearchLastName}" id="LastNameId"  onkeypress="return noenter(event);"/>
+	        </apex:pageBlockSectionItem>
+
+ 	        <apex:pageBlockSectionItem >
+	        	<apex:outputLabel value=""></apex:outputLabel>
+	        	<apex:outputPanel >
+	        		<apex:commandButton action="{!doSearch}" Id="SearchId" reRender="SearchCriteriaId, MainMessagesId" value="  Search  " />&nbsp;&nbsp;
+	        	</apex:outputPanel>
+	        </apex:pageBlockSectionItem>
+
+        </apex:pageBlockSection>
+
+        <br></br><br></br>
+
+
+
+	<apex:pageBlock mode="detail" title="Search Results">
+
+		<apex:outputPanel layout="block" style="max-height:200px; overflow:auto" id="FoundContactsId">
+
+		    <apex:pageBlockTable value="{!listFoundContacts}" var="g" columnswidth="75px,150px,150px,200px" >
+
+		      <apex:column headerClass="calign" styleClass="calign">
+		      	<apex:facet name="header"></apex:facet>
+		        <apex:commandLink action="{!doAdd}" value="Add" reRender="SubmissionContactsId, SendId, MainMessagesId">
+		            <apex:param name="currentId" value="{!g.Id}" assignTo="{!currentId}"/>
+		        </apex:commandLink>
+		      </apex:column>
+
+		      <apex:column >
+		          <apex:facet name="header">Last Name</apex:facet>
+		          <apex:outputField value="{!g.LastName}"/>
+		      </apex:column>
+
+		      <apex:column >
+		          <apex:facet name="header">First Name</apex:facet>
+		          <apex:outputField value="{!g.FirstName}"/>
+		      </apex:column>
+
+		      <apex:column >
+		          <apex:facet name="header">Title</apex:facet>
+		          <apex:outputField value="{!g.Title}"/>
+		      </apex:column>
+
+		      <apex:column >
+		          <apex:facet name="header">Account Name</apex:facet>
+		          <apex:outputField value="{!g.Account.Name}"/>
+		      </apex:column>
+
+		    </apex:pageBlockTable>
+		</apex:outputPanel>
+
+        <apex:outputPanel rendered="{!listFoundContacts.size == 0}">
+        	<br></br>
+        	<span class="lightitalic">No search results</span>
+        	<br></br>
+        	<br></br>
+        </apex:outputPanel>
+
+	</apex:pageBlock>
+
+        <br></br>
+
+	</apex:pageBlock>
+
+	<apex:pageBlock mode="detail" title="Contacts for Submission">
+
+		<span class="heavy">Below are the selected Contacts ready to send to Concierge Live.</span><br></br><br></br>
+
+
+<apex:pageBlock mode="detail" title="Selected Contacts" id="SubmissionContactsId">
+
+        <apex:pageBlockTable value="{!listSubmissionContacts}" var="g" columnswidth="75px,150px,200px" >
+
+          <apex:column headerClass="calign" styleClass="calign">
+          	<apex:facet name="header"></apex:facet>
+            <apex:commandLink action="{!doRemove}" value="Remove" reRender="SubmissionContactsId, SendId">
+                <apex:param name="currentId" value="{!g.Id}" assignTo="{!currentId}"/>
+            </apex:commandLink>
+          </apex:column>
+
+          <apex:column >
+              <apex:facet name="header">Last Name</apex:facet>
+              <apex:outputField value="{!g.LastName}"/>
+          </apex:column>
+
+          <apex:column >
+              <apex:facet name="header">First Name</apex:facet>
+              <apex:outputField value="{!g.FirstName}"/>
+          </apex:column>
+
+          <apex:column >
+              <apex:facet name="header">Account Name</apex:facet>
+              <apex:outputField value="{!g.Account.Name}"/>
+          </apex:column>
+
+        </apex:pageBlockTable>
+
+        <apex:outputPanel rendered="{!listSubmissionContacts.size == 0}">
+        	<br></br>
+        	<span class="lightitalic">No contacts selected for submission</span>
+        	<br></br>
+        	<br></br>
+        </apex:outputPanel>
+
+</apex:pageBlock>
+
+		<br></br>
+
+		<apex:outputPanel Id="SendId">
+			<apex:commandButton rendered="{!listSubmissionContacts.size != 0}" value="  Send to Concierge Live  "
+						onclick="window.open('{!oSubmissionUrl}','_blank');" />
+		</apex:outputPanel>
+		<br></br><br></br>
+
+	</apex:pageBlock>
+
+</apex:form>
+</apex:page>
