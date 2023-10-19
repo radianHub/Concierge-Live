@@ -5,8 +5,19 @@ global class AttendeeContactBatch implements Database.Batchable<sObject> {
 	}
 
 	global void execute(Database.BatchableContext bc, List<ConciergeLive__Attendee__c> attendees) {
+		Map<Id, Contact> contactsMap = new Map<Id, Contact>([
+			SELECT Id
+			FROM Contact
+			WHERE Id IN :Pluck.ids('ConciergeLive__Object_ID__c', attendees)
+		]);
+
 		for (ConciergeLive__Attendee__c attendee : attendees) {
-			attendee.ConciergeLive__Contact__c = attendee.ConciergeLive__Object_ID__c;
+			Id objectId = attendee.ConciergeLive__Object_ID__c;
+			if (objectId.getSobjectType() == Contact.sObjectType && contactsMap.get(attendee.ConciergeLive__Object_ID__c) != null) {
+				attendee.ConciergeLive__Contact__c = attendee.ConciergeLive__Object_ID__c;
+			} else {
+				attendee.ConciergeLive__Contact__c = null;
+			}
 		}
 
 		try {

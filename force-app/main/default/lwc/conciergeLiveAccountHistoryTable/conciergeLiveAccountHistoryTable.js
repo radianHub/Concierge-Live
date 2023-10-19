@@ -1,4 +1,4 @@
-import { LightningElement, api, wire, track } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import getAttendeesForAccount from '@salesforce/apex/ConciergeLiveAttendeeSearch.findByAccount';
 
@@ -34,7 +34,7 @@ const COLUMNS = [
 		hideDefaultActions: true,
 	},
 	{ label: 'Requester', fieldName: 'user_name', hideDefaultActions: true },
-	{ label: 'Status', fieldName: 'status', hideDefaultActions: true },
+	{ label: 'State', fieldName: 'state', hideDefaultActions: true },
 ];
 
 export default class conciergeLiveAccountHistoryTable extends NavigationMixin(LightningElement) {
@@ -47,7 +47,6 @@ export default class conciergeLiveAccountHistoryTable extends NavigationMixin(Li
 		const accountId = this.recordId;
 		try {
 			let result = await getAttendeesForAccount({ accountId: accountId });
-			console.log(result);
 			let formatted = result.map((attendee) => {
 				return {
 					event_name: attendee.ConciergeLive__Event_Name__c,
@@ -57,12 +56,10 @@ export default class conciergeLiveAccountHistoryTable extends NavigationMixin(Li
 					value: attendee.ConciergeLive__Ticket_Value__c,
 					ticket_request_id: attendee.ConciergeLive__Ticket_Request_ID__c,
 					user_name: attendee.ConciergeLive__Requester_Name__c,
-					status: attendee.ConciergeLive__Status__c,
+					state: attendee.ConciergeLive__State__c,
 				};
 			});
-			console.log(formatted);
 			this.data = formatted;
-			console.log(this.data);
 		} catch (err) {
 			console.log(err);
 		}

@@ -12,7 +12,7 @@ public with sharing class ConciergeLiveAttendeeSearch {
 				ConciergeLive__Ticket_Request_ID__c,
 				ConciergeLive__Ticket_Value__c,
 				ConciergeLive__Venue_Name__c,
-				ConciergeLive__Status__c
+				ConciergeLive__State__c
 			FROM ConciergeLive__Attendee__c
 			WHERE
 				ConciergeLive__Object_ID__c = :id
@@ -41,7 +41,7 @@ public with sharing class ConciergeLiveAttendeeSearch {
 				ConciergeLive__Ticket_Request_ID__c,
 				ConciergeLive__Ticket_Value__c,
 				ConciergeLive__Venue_Name__c,
-				ConciergeLive__Status__c
+				ConciergeLive__State__c
 			FROM ConciergeLive__Attendee__c
 			WHERE
 				ConciergeLive__Object_ID__c IN :contactIds

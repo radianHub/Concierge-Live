@@ -51,8 +51,8 @@ const COLUMNS = [
 		hideDefaultActions: true,
 	},
 	{
-		label: 'Status',
-		fieldName: 'status',
+		label: 'State',
+		fieldName: 'state',
 		hideDefaultActions: true,
 	},
 ];
@@ -68,7 +68,7 @@ function mapToTableEntry(arr) {
 				ticket_request_id: att.ConciergeLive__Ticket_Request_ID__c,
 				user_name: att.ConciergeLive__Requester_Name__c,
 				date: att.ConciergeLive__Event_Date__c,
-				status: att.ConciegeLive__Status__c,
+				state: att.ConciergeLive__State__c,
 			};
 		});
 	} catch (e) {

@@ -92,9 +92,6 @@ public class RequiredFieldsCache {
 			Document.FolderId => getGenericParentProvider(User.sObjectType),
 			Document.Name => 'Some Document'
 		},
-		EmailMessage.sObjectType => new Map<SObjectField, Object>{
-			EmailMessage.ParentId => getGenericParentProvider(Case.sObjectType)
-		},
 		EmailTemplate.sObjectType => new Map<SObjectField, Object>{
 			EmailTemplate.DeveloperName => SObjectFactory.provideUniqueString('Template'),
 			EmailTemplate.FolderId => getGenericParentProvider(User.sObjectType),
