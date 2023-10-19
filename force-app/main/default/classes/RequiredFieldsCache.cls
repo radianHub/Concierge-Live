@@ -17,12 +17,6 @@ public class RequiredFieldsCache {
 			AccountContactRole.AccountId => getGenericParentProvider(Account.sObjectType),
 			AccountContactRole.ContactId => getGenericParentProvider(Contact.sObjectType)
 		},
-		AccountShare.sObjectType => new Map<SObjectField, Object>{
-			AccountShare.AccountAccessLevel => 'Edit',
-			AccountShare.OpportunityAccessLevel => 'Edit',
-			AccountShare.AccountId => getGenericParentProvider(Account.sObjectType),
-			AccountShare.UserOrGroupId => getGenericParentProvider(Group.sObjectType)
-		},
 		Asset.sObjectType => new Map<SObjectField, Object>{
 			Asset.AccountId => getGenericParentProvider(Account.sObjectType),
 			Asset.Name => 'Some Asset'
@@ -44,11 +38,6 @@ public class RequiredFieldsCache {
 			CaseContactRole.CasesId => getGenericParentProvider(Case.sObjectType),
 			CaseContactRole.ContactId => getGenericParentProvider(Contact.sObjectType),
 			CaseContactRole.Role => 'Role'
-		},
-		CaseShare.sObjectType => new Map<SObjectField, Object>{
-			CaseShare.CaseId => getGenericParentProvider(Case.sObjectType),
-			CaseShare.UserOrGroupId => getGenericParentProvider(Group.sObjectType),
-			CaseShare.CaseAccessLevel => 'Edit'
 		},
 		CaseSolution.sObjectType => new Map<SObjectField, Object>{
 			CaseSolution.CaseId => getGenericParentProvider(Case.sObjectType),
@@ -132,11 +121,6 @@ public class RequiredFieldsCache {
 			IdeaComment.IdeaId => getGenericParentProvider(Idea.sObjectType)
 		},
 		Lead.sObjectType => new Map<SObjectField, Object>{ Lead.LastName => 'Doe', Lead.Company => 'ACME' },
-		LeadShare.sObjectType => new Map<SObjectField, Object>{
-			LeadShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			LeadShare.LeadId => getGenericParentProvider(Lead.sObjectType),
-			LeadShare.LeadAccessLevel => 'Edit'
-		},
 		Note.sObjectType => new Map<SObjectField, Object>{
 			Note.ParentId => getGenericParentProvider(Account.sObjectType),
 			Note.Title => 'Some Note'
@@ -164,11 +148,6 @@ public class RequiredFieldsCache {
 			OpportunityLineItem.PricebookEntryId => getGenericParentProvider(PricebookEntry.sObjectType),
 			OpportunityLineItem.UnitPrice => 1,
 			OpportunityLineItem.Quantity => 1
-		},
-		OpportunityShare.sObjectType => new Map<SObjectField, Object>{
-			OpportunityShare.OpportunityId => getGenericParentProvider(Opportunity.sObjectType),
-			OpportunityShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			OpportunityShare.OpportunityAccessLevel => 'Edit'
 		},
 		Partner.sObjectType => new Map<SObjectField, Object>{
 			Partner.AccountFromId => getGenericParentProvider(Account.sObjectType),
@@ -203,11 +182,6 @@ public class RequiredFieldsCache {
 			QuickText.Message => 'Some Message',
 			QuickText.Name => 'Some Text'
 		},
-		QuickTextShare.sObjectType => new Map<SObjectField, Object>{
-			QuickTextShare.ParentId => getGenericParentProvider(QuickText.sObjectType),
-			QuickTextShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			QuickTextShare.AccessLevel => 'Edit'
-		},
 		Solution.sObjectType => new Map<SObjectField, Object>{ Solution.SolutionName => 'Some Solution' },
 		SetupEntityAccess.sObjectType => new Map<SObjectField, Object>{
 			SetupEntityAccess.ParentId => getGenericParentProvider(PermissionSet.sObjectType),
@@ -217,11 +191,6 @@ public class RequiredFieldsCache {
 		},
 		StreamingChannel.sObjectType => new Map<SObjectField, Object>{
 			StreamingChannel.Name => SObjectFactory.provideUniqueString('/u/TestChannel')
-		},
-		StreamingChannelShare.sObjectType => new Map<SObjectField, Object>{
-			StreamingChannelShare.ParentId => getGenericParentProvider(StreamingChannel.sObjectType),
-			StreamingChannelShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			StreamingChannelShare.AccessLevel => 'Edit'
 		},
 		User.sObjectType => new Map<SObjectField, Object>{
 			User.LastName => 'Doe',
@@ -244,17 +213,7 @@ public class RequiredFieldsCache {
 			UserProvisioningRequest.Operation => 'Read',
 			UserProvisioningRequest.ApprovalStatus => 'Denied'
 		},
-		UserProvisioningRequestShare.sObjectType => new Map<SObjectField, Object>{
-			UserProvisioningRequestShare.ParentId => getGenericParentProvider(UserProvisioningRequest.sObjectType),
-			UserProvisioningRequestShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			UserProvisioningRequestShare.AccessLevel => 'Edit'
-		},
 		UserRole.sObjectType => new Map<SObjectField, Object>{ UserRole.Name => 'Some Role' },
-		UserShare.sObjectType => new Map<SObjectField, Object>{
-			UserShare.UserId => getGenericParentProvider(User.sObjectType),
-			UserShare.UserOrGroupId => getGenericParentProvider(User.sObjectType),
-			UserShare.UserAccessLevel => 'Edit'
-		},
 		ConciergeLive__Attendee__c.sObjectType => new Map<SObjectField, Object>{
 			ConciergeLive__Attendee__c.ConciergeLive__Ticket_Request_ID__c => '12345',
 			ConciergeLive__Attendee__c.ConciergeLive__Object_ID__c => getGenericParentProvider(Contact.sObjectType)
