@@ -1,13 +1,16 @@
 <template>
-    <lightning-card title="Concierge Live Event History (assigned tickets)">
-        <lightning-button label="Request Tickets" slot="actions" onclick={navigateToSearch}></lightning-button>
-        <div style="height: 300px;">
-            <lightning-datatable
-                key-field="id"
-                data={data}
-                columns={columns}
-                hide-checkbox-column="true">
-            </lightning-datatable>
-        </div>    
-    </lightning-card>
+	<lightning-card title="Concierge Live Event History (assigned tickets)">
+		<lightning-button
+			label="Request Tickets"
+			slot="actions"
+			onclick={navigateToSearch}></lightning-button>
+		<div style="height: 300px">
+			<lightning-datatable
+				key-field="id"
+				data={data}
+				columns={columns}
+				hide-checkbox-column="true">
+			</lightning-datatable>
+		</div>
+	</lightning-card>
 </template>
